@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>NewYork Times TopStories</title>
+    <link href="https://fonts.googleapis.com/css2?family=Patua+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+
+<body>
+
+
+    <style>
+        body {
+            background-color: rgb(212, 211, 211);
+        }
+
+        .rw0 {
+            margin-top: 50px;
+            margin-bottom: 40px;
+            background: white;
+            padding: 20px;
+        }
+
+        .ig {
+            height: 250px;
+            width: 250px;
+
+
+        }
+
+        .cd {
+            font-family: monospace;
+            font-size: 15px;
+            font-weight: lighter;
+        }
+
+        .tt {
+            font-family: 'Patua One', cursive;
+        }
+
+        .bl {
+            font-style: italic;
+        }
+
+        .it {
+            font-family: 'Cinzel', serif;
+        }
+
+        .sec {
+            font-family: 'Cinzel', serif;
+        }
+    </style>
+    <script>
+        var aa = document.createElement("div");
+        document.body.appendChild(aa);
+        aa.className = 'container';
+
+        var bb = document.createElement("div");
+        aa.appendChild(bb);
+        bb.classList.add('row');
+
+        var last = document.createElement("div");
+        bb.appendChild(last);
+        last.classList.add('col-sm-12', 'col-md-12', 'col-lg-12');
+
+        const url = 'https://api.nytimes.com/svc/topstories/v2/arts.json?api-key=rMAhqIFmyGyq4u0ND75qiTJm2cX4iF6E'
+        async function getData() {
+            const response = await fetch(url);
+            const data = await response.json();
+            console.log(data.results)
+
+            var abs = data.results
+            for (i = 0; i < abs.length; i++) {
+
+                let cc = document.createElement("div");
+                last.appendChild(cc);
+                cc.classList.add('card', 'border-light', 'rw0');
+
+                let new0 = document.createElement("div");
+                cc.appendChild(new0);
+                new0.className = 'container';
+
+                let new1 = document.createElement("div");
+                new0.appendChild(new1);
+                new1.classList.add('row');
+
+                let new2 = document.createElement("div");
+                new1.appendChild(new2);
+                new2.classList.add('col-sm-6', 'col-md-8', 'col-lg-8');
+
+                let it = document.createElement("h1");
+                new2.appendChild(it);
+                it.className = 'it';
+                it.innerHTML = abs[i].item_type;
+
+                let sec = document.createElement("h4");
+                new2.appendChild(sec);
+                sec.className = 'sec';
+                sec.innerHTML = abs[i].section;
+
+                var mybr = document.createElement('br');
+                new2.appendChild(mybr);
+
+                let cd = document.createElement("h6");
+                new2.appendChild(cd);
+                cd.className = 'cd';
+                cd.innerHTML = abs[i].created_date;
+
+                var mybr = document.createElement('br');
+                new2.appendChild(mybr);
+
+                let tt = document.createElement("h1");
+                new2.appendChild(tt);
+                tt.className = 'tt';
+                tt.innerHTML = abs[i].title;
+
+                var mybr = document.createElement('br');
+                new2.appendChild(mybr);
+
+                let ab = document.createElement("h4");
+                new2.appendChild(ab);
+                ab.innerHTML = abs[i].abstract;
+
+                let bl = document.createElement("h5");
+                new2.appendChild(bl);
+                bl.className = 'bl';
+                bl.innerHTML = '-' + abs[i].byline;
+
+                var mybr = document.createElement('br');
+                new2.appendChild(mybr);
+
+                let su = document.createElement("a");
+                let linkText = document.createTextNode("Continue reading...");
+                su.appendChild(linkText);
+                su.target = '_blank';
+                su.href = abs[i].url;
+                new2.appendChild(su);
+
+                let new3 = document.createElement("div");
+                new1.appendChild(new3);
+                new3.classList.add('col-sm-6', 'col-md-4', 'col-lg-4');
+
+                let img = document.createElement("img");
+                new3.appendChild(img);
+                img.src = abs[i].multimedia[0].url;
+                img.classList.add('card-img-top')
+            }
+        }
+        getData();
+    </script>
+</body>
+
+</html>
